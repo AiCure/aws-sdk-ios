@@ -55,6 +55,10 @@ NSString * const AWSMTLBooleanValueTransformerName = @"AWSMTLBooleanValueTransfo
 		reversibleTransformerWithForwardBlock:^ id (id JSONDictionary) {
 			if (JSONDictionary == nil) return nil;
 
+            if ([JSONDictionary isKindOfClass:[NSString class]]) {
+                return JSONDictionary;
+            }
+
 			NSAssert([JSONDictionary isKindOfClass:NSDictionary.class], @"Expected a dictionary, got: %@", JSONDictionary);
 
 			return [AWSMTLJSONAdapter modelOfClass:modelClass fromJSONDictionary:JSONDictionary error:NULL];

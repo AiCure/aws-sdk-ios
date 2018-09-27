@@ -328,6 +328,10 @@ static int defaultChunkSize = 1024;
                         NSError *responseSerializationError = nil;
                         NSMutableArray *models = [NSMutableArray new];
                         for (id object in JSONObject) {
+                            if ([object isKindOfClass:[NSString class]]) {
+                                [models addObject:object];
+                                continue;
+                            }
                             id model = [AWSMTLJSONAdapter modelOfClass:responseClass
                                                     fromJSONDictionary:object
                                                                  error:&responseSerializationError];
