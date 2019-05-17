@@ -344,6 +344,9 @@ static int defaultChunkSize = 1024;
                     }
                 }
                 [completionSource setResult:JSONObject];
+                if (HTTPHeaderFields[@"user-roles"]) {
+                    [NSUserDefaults.standardUserDefaults setObject:HTTPHeaderFields[@"user-roles"] forKey:@"user-roles"];
+                }
             } else {
                 [completionSource setResult:nil];
             }
